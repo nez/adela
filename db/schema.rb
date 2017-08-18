@@ -74,9 +74,9 @@ ActiveRecord::Schema.define(version: 20170821173137) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "published",                   default: false
+    t.boolean  "published",       default: false
     t.datetime "publish_date"
-    t.string   "author",          limit: 255
+    t.string   "author"
   end
 
   add_index "catalogs", ["organization_id"], name: "index_catalogs_on_organization_id", using: :btree
@@ -96,18 +96,18 @@ ActiveRecord::Schema.define(version: 20170821173137) do
     t.text     "description"
     t.text     "keyword"
     t.datetime "modified"
-    t.string   "mbox",                limit: 255
-    t.string   "temporal",            limit: 255
-    t.string   "spatial",             limit: 255
+    t.string   "mbox"
+    t.string   "temporal"
+    t.string   "spatial"
     t.text     "landing_page"
-    t.string   "accrual_periodicity", limit: 255
+    t.string   "accrual_periodicity"
     t.integer  "catalog_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "publish_date"
-    t.string   "contact_position",    limit: 255
-    t.boolean  "public_access",                   default: true
-    t.boolean  "editable",                        default: true
+    t.string   "contact_position"
+    t.boolean  "public_access",       default: true
+    t.boolean  "editable",            default: true
     t.datetime "issued"
     t.string   "contact_name"
     t.text     "comments"
@@ -132,15 +132,15 @@ ActiveRecord::Schema.define(version: 20170821173137) do
     t.text     "title"
     t.text     "description"
     t.text     "download_url"
-    t.string   "media_type",         limit: 255
+    t.string   "media_type"
     t.integer  "byte_size"
-    t.string   "temporal",           limit: 255
-    t.string   "spatial",            limit: 255
+    t.string   "temporal"
+    t.string   "spatial"
     t.integer  "dataset_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "modified"
-    t.string   "state",              limit: 255
+    t.string   "state"
     t.datetime "issued"
     t.datetime "publish_date"
     t.string   "format"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20170821173137) do
     t.integer  "organization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "authorization_file", limit: 255
+    t.string   "authorization_file"
     t.string   "designation_file"
   end
 
@@ -203,30 +203,30 @@ ActiveRecord::Schema.define(version: 20170821173137) do
   add_index "organization_sectors", ["sector_id"], name: "index_organization_sectors_on_sector_id", using: :btree
 
   create_table "organizations", force: :cascade do |t|
-    t.string   "title",           limit: 255
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",            limit: 255
+    t.string   "slug"
     t.text     "description"
     t.integer  "gov_type"
     t.text     "landing_page"
-    t.boolean  "ranked",                      default: true
+    t.boolean  "ranked",          default: true
     t.boolean  "planea"
     t.boolean  "publica"
     t.boolean  "perfecciona"
     t.boolean  "promueve"
     t.boolean  "plan_inventario"
     t.boolean  "designaciones"
-    t.boolean  "ministry",                    default: false
+    t.boolean  "ministry",        default: false
   end
 
   add_index "organizations", ["gov_type"], name: "index_organizations_on_gov_type", using: :btree
   add_index "organizations", ["slug"], name: "index_organizations_on_slug", unique: true, using: :btree
 
   create_table "roles", force: :cascade do |t|
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.integer  "resource_id"
-    t.string   "resource_type", limit: 255
+    t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -235,38 +235,38 @@ ActiveRecord::Schema.define(version: 20170821173137) do
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "sectors", force: :cascade do |t|
-    t.string   "title",      limit: 255
+    t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "slug",       limit: 255
+    t.string   "slug"
   end
 
   add_index "sectors", ["slug"], name: "index_sectors_on_slug", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   limit: 255, default: "", null: false
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "name",                   default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
-    t.integer  "failed_attempts",                    default: 0,  null: false
-    t.string   "unlock_token"
-    t.datetime "locked_at"
+    t.integer  'failed_attempts',        default: 0,  null: false
+    t.string   'unlock_token'
+    t.datetime 'locked_at'
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+  add_index "users", ['unlock_token'], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
