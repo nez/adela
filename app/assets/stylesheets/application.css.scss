@@ -70,3 +70,83 @@ p {
 .margin-top-20 {
   margin-top: 20px;
 }
+
+.header_table { color: #0c9; text-transform: uppercase; }
+.breadcrumb-container { background-color: #fff; }
+.glyphicon-ok {color: green;}
+.glyphicon-remove {color: red;}
+p.author span {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+section#landing-data .data-table {
+    margin-top: 20px;
+}
+
+.data-table p.author span {
+    margin-left: 8px;
+}
+
+.datosTitle a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    width: 400px;
+}
+
+.data-table table>tbody>tr>td {
+    padding-bottom: 10px;
+}
+
+#searchbox {
+    width: 100%;
+    border: 1px solid #d8d8d8;
+    border-radius: 4px;
+    padding: 16px 0 22px 16px;
+    margin-bottom: 30px;
+}
+
+input#searchbox::placeholder {
+    font-size: 14px;
+}
+
+.table-wrapper i.fa-search {
+    position: absolute;
+    right: 30px;
+    top: 9px;
+    font-size: 20px;
+    transform: scale(-1, 1);
+    opacity: 0.6;
+    display: block;
+}
+
+table.dataTable tbody tr {
+    background-color: transparent;
+}
+
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+
+.table>thead>tr>th {
+    border-bottom: none !important;
+    border-top: none !important;
+}
+
+thead th:nth-of-type(1) {
+    width: 40%;
+}
+
+.dataTable {
+    background-color: #efefef;
+    border-radius: 4px;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 10px;
+}
+.descargas-tabla { width: 25% !important; }
+.status_link { width: 25% !important; }
+.recurso-col { width: 50% !important;}
+#overlay-dashboard { margin-bottom: 10px; }

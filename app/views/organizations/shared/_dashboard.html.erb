@@ -1,316 +1,475 @@
 
-<div class="overlay-dashboard">
-  <!-- header organizacion -->
-  <div class="container content-dashboard">
-    <div class="row">
-      <div class="col-sm-4 logo-div">
-        <img id="logo_org">
-      </div>
-      <div class="col-sm-8 text-right title-print">
-        <h2 class='title' id="title_org"></h2>
-        <p>Este tablero de control se actualiza cada 24 horas.</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="gray_back">
+<div class="container-fluid">
+  <div class="overlay-dashboard"  style="margin-bottom: 30px !important;">
+    <!-- header organizacion -->
     <div class="container content-dashboard">
       <div class="row">
-        <div class="col-sm-6">
-          <h4 class='title'>Calificación total de la institución</h4>
-          <p>Para conocer cómo se calcúla esta calificación da <a href="javascript:void(0)" class="openModal">click aqui.</a></p><hr>
-          <div class="row">
-            <div class="col-xs-12">
-              <span class="pull-left calificacion-dashboard high-light-dashboard" id="califTotal"></span>
-              <span class="pull-left calificacion-dashboard-gray">/10</span>
+        <div class="col-sm-4 logo-div">
+          <img id="logo_org">
+        </div>
+        <div class="col-sm-8 text-right title-print">
+          <h2 class='title' id="title_org"></h2>
+          <p>Este tablero de control se actualiza cada 24 horas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <img id="logo_org" src="" style="height: 170px !important;">
+          </div>
+          <div class="col-md-12">
+              <p style="margin-top: 15px; margin-bottom: 25px; font-size: 16px; margin-left: 20px; margin-right: 20px;">La siguiente tabla muestra todos los recursos de Datos Abiertos de la Institución, junto con el número de veces que ha sido descargado y un indicador de si el recurso está disponible o el robot tuvo problemas para descargarlo, lo que indica que el recurso no está disponible, carga demasiado lento o no es descargable por robots.</p>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="data-table">
+                  <table class="table dataTable top-5-datos" id="top-5-datos">
+                      <thead>
+                          <tr style="border-top: 0 !important;">
+                              <th style="color: #0c9 !important; text-transform: uppercase;">Recurso</th>
+                              <th style="color: #0c9 !important; text-transform: uppercase; text-align: center;">Descargas</th>
+                              <th style="color: #0c9 !important; text-transform: uppercase; text-align: center;">Estatus del link</th>
+                          </tr>
+                      </thead>
+                      <tbody id="table-downloads">
+                          <tr></tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+
+      <!-- 
+
+      **** NOTA PARA FRANK DEL FUTURO ****
+      COMENTADO MOMENTAREAMENTE HASTA NUEVO AVISO
+
+      <div class="container content-dashboard">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4 class='title'>Calificación total de la institución</h4>
+            <p>Para conocer cómo se calcúla esta calificación da <a href="javascript:void(0)" class="openModal">click aqui.</a></p><hr>
+            <div class="row">
+              <div class="col-xs-12">
+                <span class="pull-left calificacion-dashboard high-light-dashboard" id="califTotal"></span>
+                <span class="pull-left calificacion-dashboard-gray">/10</span>
+              </div>
+              <div class="col-xs-12">
+                <p>Lugar <span id="rknTotal"></span> de <span id="orgTotal"></span> instituciones.</p>
+              </div>
             </div>
-            <div class="col-xs-12">
-              <p>Lugar <span id="rknTotal"></span> de <span id="orgTotal"></span> instituciones.</p>
+          </div>
+
+          <div class="col-sm-5 col-sm-offset-1 noPrint">
+            <span class="glyphicon glyphicon-info-sign gly-warning pull-left title starDark"></span>
+            <p class="media-body">Para mejorar tu calificación te sugerimos: primero, atender tus recomendaciones y, posteriormente, realizar las actividades que tienes pendientes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container content-dashboard">
+        <div class="row">
+          <div class="col-sm-6">
+            <h3 class='title'>Atiende tus recomendaciones</h3>
+            <div class="table-responsive table-500">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center">Tipo</th>
+                    <th class="text-center">Recurso</th>
+                    <th class="text-center">Error</th>
+                  </tr>
+                </thead>
+                <tbody id="table-recommendations">
+                  <tr></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="printHiden">&nbsp;</p>
+          <div class="col-sm-5 col-sm-offset-1">
+            <p class="printHiden">&nbsp;</p>
+            <h3 class='title'>Actividades pendientes</h3>
+            <p>A continuación puedes ver por categoría las actividades pendientes que tiene tu Institución.</p><br>
+            <div class="table-responsive table-500">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="text-center">Fecha</th>
+                    <th class="text-center">Recurso</th>
+                    <th class="text-center">Tipo</th>
+                  </tr>
+                </thead>
+                <tbody id="table-pendientes">
+                  <tr></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-
-        <div class="col-sm-5 col-sm-offset-1 noPrint">
-          <span class="glyphicon glyphicon-info-sign gly-warning pull-left title starDark"></span>
-          <p class="media-body">Para mejorar tu calificación te sugerimos: primero, atender tus recomendaciones y, posteriormente, realizar las actividades que tienes pendientes.</p>
-        </div>
       </div>
     </div>
 
     <div class="container content-dashboard">
       <div class="row">
         <div class="col-sm-6">
-          <h3 class='title'>Atiende tus recomendaciones</h3>
-          <div class="table-responsive table-500">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="text-center">Tipo</th>
-                  <th class="text-center">Recurso</th>
-                  <th class="text-center">Error</th>
-                </tr>
-              </thead>
-              <tbody id="table-recommendations">
-                <tr></tr>
-              </tbody>
-            </table>
+          <h3 class='title'>Recursos publicados</h3>
+          <p>Número de recursos ya publicados contra número total de recursos por publicar.</p><hr>
+          <div class="row">
+            <div class="col-xs-12">
+              <span class="pull-left calificacion-dashboard high-light-dashboard" id="issuedPublish"></span>
+              <span class="pull-left calificacion-dashboard-gray" id="issuedTotal"></span>
+            </div>
+          </div>
+          <div class="content-sub-dashboard">
+            <h3 class='title'>Calificación de apertura <span class="high-light-dashboard">| Beta</span></h3>
+            <p>Esta calificación depende de los tipos de archivos que son publicados. Para conocer más da <a href="javascript:void(0)" class="openModal">click aquí.</a></p><hr>
+            <br>
+            <ul class="list-inline">
+              <li><div id="stars-raiting"></div></li>
+            </ul>
+          </div>
+          <p class="printHiden">&nbsp;</p>
+          <div class="content-sub-dashboard">
+            <h3 class='title'>Calidad de datos <span class="high-light-dashboard">| Beta</span></h3>
+            <p>Para conocer cómo se genera esta calificación de calidad de los datos da <a href="javascript:void(0)" class="openModal">click aquí.</a></p><hr>
+            <h2><span class="high-light-dashboard" id="calidadDatosHtml"></span></h2>
+            <p class="printHiden">&nbsp;</p>
+          </div>
+          <div class="content-sub-dashboard">
+            <a class="btn btn-primary download-pdf noPrint" href="javascript:printPDF()">Descargar como PDF</a>
           </div>
         </div>
         <p class="printHiden">&nbsp;</p>
         <div class="col-sm-5 col-sm-offset-1">
           <p class="printHiden">&nbsp;</p>
-          <h3 class='title'>Actividades pendientes</h3>
-          <p>A continuación puedes ver por categoría las actividades pendientes que tiene tu Institución.</p><br>
-          <div class="table-responsive table-500">
+          <h3 class='title'>Top 5 Recursos Descargados</h3>
+          <p>Información de los 5 recursos más descargados de tu institución.</p>
+          <div class="table-responsive table-400" style="margin-top: 20px;">
             <table class="table">
               <thead>
                 <tr>
-                  <th class="text-center">Fecha</th>
-                  <th class="text-center">Recurso</th>
-                  <th class="text-center">Tipo</th>
+                  <th>Recurso</th>
+                  <th>Última actualización</th>
+                  <th class="text-center">Descargas</th>
                 </tr>
               </thead>
-              <tbody id="table-pendientes">
+              <tbody id="table-downloads">
                 <tr></tr>
               </tbody>
             </table>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+          <h3 class='title'>Indicadores generales</h3>
+          <p>Los siguientes indicadores muestran el estado actual de tu inventario, recursos de datos, actualizaciones, solicitudes y URLs.</p><hr>
+          <div class="row">
 
-  <div class="container content-dashboard">
-    <div class="row">
-      <div class="col-sm-6">
-        <h3 class='title'>Recursos publicados</h3>
-        <p>Número de recursos ya publicados contra número total de recursos por publicar.</p><hr>
-        <div class="row">
-          <div class="col-xs-12">
-            <span class="pull-left calificacion-dashboard high-light-dashboard" id="issuedPublish"></span>
-            <span class="pull-left calificacion-dashboard-gray" id="issuedTotal"></span>
+            <div class="col-xs-12">
+              <h6 class='title'>Inventario</h6>
+              <div id="bar-chart1"></div>
+            </div>
+            <div class="col-sm-6 hidden" id="hiddenPDF">
+              <h6 class='title'>Actualizaciones</h6>
+              <div id="bar-chart2"></div>
+            </div>
+          </div>
+
+          <div class="row hidden" id="hiddenPDF">
+            <div class="col-sm-6">
+              <h6 class='title'>URLs</h6>
+              <div id="bar-chart3"></div>
+            </div>
+            <div class="col-sm-6">
+              <h6 class='title'>Solicitudes</h6>
+              <div id="bar-chart4"></div>
+            </div>
+            <div class="col-sm-6">
+              <h6 class='title'>Recursos de datos</h6>
+              <div id="bar-chart5"></div>
+            </div>
           </div>
         </div>
-        <div class="content-sub-dashboard">
-          <h3 class='title'>Calificación de apertura <span class="high-light-dashboard">| Beta</span></h3>
-          <p>Esta calificación depende de los tipos de archivos que son publicados. Para conocer más da <a href="javascript:void(0)" class="openModal">click aquí.</a></p><hr>
+      </div>
+    </div> -->
+  </div>
+  </div>
+
+  <!-- modalTotal -->
+  <div id="modalTotal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">¿Cómo se calcúla esta calificación?</h4>
+        </div>
+        <div class="modal-body">
+
+          <h4 class="title">Calificación de la Dependencia</h4>
           <br>
-          <ul class="list-inline">
-            <li><div id="stars-raiting"></div></li>
+          <p>Para asignar evaluar a las instituciones se toman en cuenta 4 aspectos previos a la ejecución de la metodología de calificación:</p>
+          <ul>
+            <li>Calificación de Calidad (60%)</li>
+            <li>Atrasos en la publicación de sus datos (15%)</li>
+            <li>Descargas realizadas por usuarios de datos.gob (15%)</li>
+            <li>Recomendaciones por atender (10%)</li>
           </ul>
-        </div>
-        <p class="printHiden">&nbsp;</p>
-        <div class="content-sub-dashboard">
-          <h3 class='title'>Calidad de datos <span class="high-light-dashboard">| Beta</span></h3>
-          <p>Para conocer cómo se genera esta calificación de calidad de los datos da <a href="javascript:void(0)" class="openModal">click aquí.</a></p><hr>
-          <h2><span class="high-light-dashboard" id="calidadDatosHtml"></span></h2>
-          <p class="printHiden">&nbsp;</p>
-        </div>
-        <div class="content-sub-dashboard">
-          <a class="btn btn-primary download-pdf noPrint" href="javascript:printPDF()">Descargar como PDF</a>
+          <p>
+            Cada uno de los aspectos suma valor en proporción al peso asignado en la metodología.
+          </p>
+          <p>A continuación se desglosa el peso de cada uno de los aspectos mencionados anteriormente dentro de la calificación total de una dependencia.</p>
+
+          <h4 class="title">Atrasos en la publicación de sus datos.</h4>
+          <br>
+          <p>La dependencia será penalizada si cuenta con atrasos en la publicación de sus datos en el momento de la evaluación. Una dependencia con atrasos no puede ser acreedora a la adición del <strong>15% de la calificación</strong>, una dependencia que esta al dia podrá sumar este porcentaje a su calificación.</p>
+
+          <h4 class="title">Descargas realizadas por los usuarios.</h4>
+          <br>
+          <p>Las descargas de los recursos son contabilizadas para evaluar la popularidad de los datos publicados por una institución. Una dependencia que en el momento de la evaluación cuente con descargas contabilizadas accedera a un <strong>15%</strong> de su calificación, de lo contrario no podrá sumar este porcentaje.</p>
+
+          <h4 class="title">Recomendaciones por atender.</h4>
+          <br>
+          <p>Las dependencias son evaluadas constantemente y son emitidas recomendaciones cuando existen detalles a pulir en los datos que publican. Cuando una dependencia cuenta con recomendaciones sin resolver (pendientes), no podrá sumar <strong>10%</strong> restante de la calificación, una dependencia que está al tanto de las recomendaciones y las resuelva en tiempo y forma podrá sumar este porcentaje.</p>
+
+          <h4 class="title">Calificación de Apertura</h4>
+          <br>
+          <p>Esta calificación se relaciona con el tipo de formato en el que las dependencias o entidades de la APF publican sus archivos. La calificación se mide por medio de estrellas siendo la calificación máxima 5 estrellas. De esta manera, cuando se publique un documento que no cuente con las características suficientes para ser considerado Dato Abiertos, se le asignan menos estrellas, es decir, una menor calificación de apertura.</p>
+          <p>Los conjuntos recibirán las siguientes calificaciones según cómo se publiquen los datos:</p>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="tdStar">Calificación</th>
+                  <th>Descripción</th>
+                  <th>Formato de Publicación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="tdStar">
+                    <i class="glyphicon glyphicon-star"></i>
+                  </td>
+                  <td>Compartir información sin importar el formato</td>
+                  <td>PNG, PDF, BMP, JPG, ZIP</td>
+                </tr>
+                <tr>
+                  <td class="tdStar">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                  </td>
+                  <td>Hacer la información disponible de manera estructurada</td>
+                  <td>XLS, XLSX</td>
+                </tr>
+                <tr>
+                  <td class="tdStar">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                  </td>
+                  <td>Hacer la información disponible en un formato no propietario</td>
+                  <td>CSV, JSON, TXT, XML, HTML, TSV, SHP, PSV, KML, KMZ</td>
+                </tr>
+                <tr>
+                  <td class="tdStar">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                  </td>
+                  <td>Utilizar URLs para definir datos para que la gente pueda apuntar a estos</td>
+                  <td>RDF</td>
+                </tr>
+                <tr>
+                  <td class="tdStar">
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                    <i class="glyphicon glyphicon-star"></i>
+                  </td>
+                  <td>Agregar datos externos a tus datos para proveer contexto</td>
+                  <td>LOD</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h4 class="title">Calificación de Calidad.</h4>
+          <br>
+          <p>
+            La calidad de una dependencia se obtiene a través de un ponderado de la calificación de sus recursos en cuanto a calidad se refiere. Para ser acreedor a las distintas medallas de calidad, el recurso debe cumplir con ciertos metadatos y mantenimiento requeridos, los cuales son llenados desde la plataforma ADELA. Los valores de esta calificación recaen en 3 categorías: <strong>bronce, plata y oro</strong>. Estas “medallas” aportan el siguiente valor a la calificación:
+          </p>
+          <ul>
+            <li>Bronce: +40%</li>
+            <li>Plata: +10%</li>
+            <li>Oro: +10%</li>
+          </ul>
+          <p>
+            Para obtener las medallas se deben cubrir los siguientes requerimientos:
+          </p>
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Medalla</th>
+                  <th>Requerimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Bronce (3)</td>
+                  <td>URL, título, descripción, tema y etiquetas</td>
+                </tr>
+                <tr>
+                  <td>Plata (2)</td>
+                  <td>URL, nombre y correo de contacto del propietario </td>
+                </tr>
+                <tr>
+                  <td>Oro (1)</td>
+                  <td>Actualizaciones realizadas al recurso según la frecuencia definida en ADELA (diario, semanal, etc.)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
         </div>
       </div>
-      <p class="printHiden">&nbsp;</p>
-      <div class="col-sm-5 col-sm-offset-1">
-        <p class="printHiden">&nbsp;</p>
-        <h3 class='title'>Top 5 Recursos Descargados</h3>
-        <p>Información de los 5 recursos más descargados de tu institución.</p>
-        <div class="table-responsive table-400" style="margin-top: 20px;">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Recurso</th>
-                <th>Última actualización</th>
-                <th class="text-center">Descargas</th>
-              </tr>
-            </thead>
-            <tbody id="table-downloads">
-              <tr></tr>
-            </tbody>
-          </table>
-        </div>
-        <h3 class='title'>Indicadores generales</h3>
-        <p>Los siguientes indicadores muestran el estado actual de tu inventario, recursos de datos, actualizaciones, solicitudes y URLs.</p><hr>
-        <div class="row">
 
-          <div class="col-xs-12">
-            <h6 class='title'>Inventario</h6>
-            <div id="bar-chart1"></div>
-          </div>
-          <div class="col-sm-6 hidden" id="hiddenPDF">
-            <h6 class='title'>Actualizaciones</h6>
-            <div id="bar-chart2"></div>
-          </div>
-        </div>
-
-        <div class="row hidden" id="hiddenPDF">
-          <div class="col-sm-6">
-            <h6 class='title'>URLs</h6>
-            <div id="bar-chart3"></div>
-          </div>
-          <div class="col-sm-6">
-            <h6 class='title'>Solicitudes</h6>
-            <div id="bar-chart4"></div>
-          </div>
-          <div class="col-sm-6">
-            <h6 class='title'>Recursos de datos</h6>
-            <div id="bar-chart5"></div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
-
-<!-- modalTotal -->
-<div id="modalTotal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">¿Cómo se calcúla esta calificación?</h4>
-      </div>
-      <div class="modal-body">
-
-        <h4 class="title">Calificación de la Dependencia</h4>
-        <br>
-        <p>Para asignar evaluar a las instituciones se toman en cuenta 4 aspectos previos a la ejecución de la metodología de calificación:</p>
-        <ul>
-          <li>Calificación de Calidad (60%)</li>
-          <li>Atrasos en la publicación de sus datos (15%)</li>
-          <li>Descargas realizadas por usuarios de datos.gob (15%)</li>
-          <li>Recomendaciones por atender (10%)</li>
-        </ul>
-        <p>
-          Cada uno de los aspectos suma valor en proporción al peso asignado en la metodología.
-        </p>
-        <p>A continuación se desglosa el peso de cada uno de los aspectos mencionados anteriormente dentro de la calificación total de una dependencia.</p>
-
-        <h4 class="title">Atrasos en la publicación de sus datos.</h4>
-        <br>
-        <p>La dependencia será penalizada si cuenta con atrasos en la publicación de sus datos en el momento de la evaluación. Una dependencia con atrasos no puede ser acreedora a la adición del <strong>15% de la calificación</strong>, una dependencia que esta al dia podrá sumar este porcentaje a su calificación.</p>
-
-        <h4 class="title">Descargas realizadas por los usuarios.</h4>
-        <br>
-        <p>Las descargas de los recursos son contabilizadas para evaluar la popularidad de los datos publicados por una institución. Una dependencia que en el momento de la evaluación cuente con descargas contabilizadas accedera a un <strong>15%</strong> de su calificación, de lo contrario no podrá sumar este porcentaje.</p>
-
-        <h4 class="title">Recomendaciones por atender.</h4>
-        <br>
-        <p>Las dependencias son evaluadas constantemente y son emitidas recomendaciones cuando existen detalles a pulir en los datos que publican. Cuando una dependencia cuenta con recomendaciones sin resolver (pendientes), no podrá sumar <strong>10%</strong> restante de la calificación, una dependencia que está al tanto de las recomendaciones y las resuelva en tiempo y forma podrá sumar este porcentaje.</p>
-
-        <h4 class="title">Calificación de Apertura</h4>
-        <br>
-        <p>Esta calificación se relaciona con el tipo de formato en el que las dependencias o entidades de la APF publican sus archivos. La calificación se mide por medio de estrellas siendo la calificación máxima 5 estrellas. De esta manera, cuando se publique un documento que no cuente con las características suficientes para ser considerado Dato Abiertos, se le asignan menos estrellas, es decir, una menor calificación de apertura.</p>
-        <p>Los conjuntos recibirán las siguientes calificaciones según cómo se publiquen los datos:</p>
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="tdStar">Calificación</th>
-                <th>Descripción</th>
-                <th>Formato de Publicación</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="tdStar">
-                  <i class="glyphicon glyphicon-star"></i>
-                </td>
-                <td>Compartir información sin importar el formato</td>
-                <td>PNG, PDF, BMP, JPG, ZIP</td>
-              </tr>
-              <tr>
-                <td class="tdStar">
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </td>
-                <td>Hacer la información disponible de manera estructurada</td>
-                <td>XLS, XLSX</td>
-              </tr>
-              <tr>
-                <td class="tdStar">
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </td>
-                <td>Hacer la información disponible en un formato no propietario</td>
-                <td>CSV, JSON, TXT, XML, HTML, TSV, SHP, PSV, KML, KMZ</td>
-              </tr>
-              <tr>
-                <td class="tdStar">
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </td>
-                <td>Utilizar URLs para definir datos para que la gente pueda apuntar a estos</td>
-                <td>RDF</td>
-              </tr>
-              <tr>
-                <td class="tdStar">
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                  <i class="glyphicon glyphicon-star"></i>
-                </td>
-                <td>Agregar datos externos a tus datos para proveer contexto</td>
-                <td>LOD</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <h4 class="title">Calificación de Calidad.</h4>
-        <br>
-        <p>
-          La calidad de una dependencia se obtiene a través de un ponderado de la calificación de sus recursos en cuanto a calidad se refiere. Para ser acreedor a las distintas medallas de calidad, el recurso debe cumplir con ciertos metadatos y mantenimiento requeridos, los cuales son llenados desde la plataforma ADELA. Los valores de esta calificación recaen en 3 categorías: <strong>bronce, plata y oro</strong>. Estas “medallas” aportan el siguiente valor a la calificación:
-        </p>
-        <ul>
-          <li>Bronce: +40%</li>
-          <li>Plata: +10%</li>
-          <li>Oro: +10%</li>
-        </ul>
-        <p>
-          Para obtener las medallas se deben cubrir los siguientes requerimientos:
-        </p>
-
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Medalla</th>
-                <th>Requerimiento</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Bronce (3)</td>
-                <td>URL, título, descripción, tema y etiquetas</td>
-              </tr>
-              <tr>
-                <td>Plata (2)</td>
-                <td>URL, nombre y correo de contacto del propietario </td>
-              </tr>
-              <tr>
-                <td>Oro (1)</td>
-                <td>Actualizaciones realizadas al recurso según la frecuencia definida en ADELA (diario, semanal, etc.)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
-
   </div>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
+$(document).ready(function () {
+  omitirAcentos("<%= current_user.organization.slug %>");
 
+function getURLParameter(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, '-'])[1].replace(/\+/g, '%20')) || null;
+}
+
+function omitirAcentos(orgName) {
+    var acentos = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç";
+    var original = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc";
+    for (var i = 0; i < acentos.length; i++) {
+        orgName = orgName.replace(acentos.charAt(i), original.charAt(i));
+    }
+    return orgName, getapiOrg(orgName);
+}
+
+function getapiOrg(orgName) {
+    var totalCalidad, percentRecommen, percentCalidad, dataApi, dataApiOPI, dataDescargasOpi, orgTitle, orgLogoUrl,
+        downloads, adelaIssued, resourceId, rating, totalRaiting, resourceTitle, resourceType;
+    var valueDownloads = [];
+    var issuedTotal = 0;
+    var issuedPublish = 0;
+    var sumaRating = 0;
+    var sumaCalidad = 0;
+    var isPublicTrue = 0;
+    var isPublicFalse = 0;
+    var totalRecommendations = 0;
+
+    $(".org-breadcrumb").text(orgName.toUpperCase());
+ 
+    //Ajax Get
+    $.ajax({
+        //url: 'http://api.datos.gob.mx/v1/data-fusion?catalog-dataset.publisher.name=SHCP&pageSize=1000',
+        url: 'https://api.datos.gob.mx/v1/data-fusion?adela.inventory.slug=' + orgName,
+        async: false,
+        type: 'GET',
+        success: function (data) {
+            dataApi = data;
+        },
+        error: function (data) {
+            console.error("Error!", data);
+        }
+    });
+    $.ajax({
+        url: '<%= OPI_DASHBOARD_URL_API %>' + orgName + '/',
+        async: false,
+        type: 'GET',
+        success: function (data) {
+            dataApiOPI = data;
+        },
+        error: function (data) {
+            console.error("Error!", data);
+        }
+    });
+    $.ajax({
+        url: '<%= OPI_DASHBOARD_URL_API %>recursos-mas-descargados/' + orgName + '/',
+        async: false,
+        type: 'GET',
+        success: function (data) {
+            dataDescargasOpi = data;
+        },
+        error: function (data) {
+            console.error("Error!", data);
+        }
+    });
+
+$('#top-5-datos').dataTable({
+    searching: false,
+    "language": {
+          "paginate": {
+            "previous": "Anterior",
+            "next": "Siguiente",
+          },
+          "emptyTable": "No se encontraron resultados",
+          "zeroRecords": "No se encontraron resultados",
+          "sZeroRecords": "No se encontraron resultados",
+          "infoEmpty": "No se encontraron resultados"
+        },
+    "info": false,
+    "bLengthChange": false,
+    "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+        $('td:eq(0)', nRow).attr("tag", aData.slug).addClass("recurso-col");
+        $('td:eq(1)', nRow).addClass("text-center");
+    },
+    "ajax": {
+    "url": '<%= OPI_DASHBOARD_URL_API %>recursos-mas-descargados/' + orgName + '/',
+    "type": 'POST',
+    "dataSrc": function (json) {
+        if(json.recursos === undefined || json.recursos === null){
+          alert('Sentimos los incovenientes. Estamos actualizando los datos. Intenta mas tarde.');
+          return false;
+        }
+
+        console.log(json.recursos);
+        return json.recursos;
+    }
+    },"error": function(){
+    alert('Sentimos los incovenientes. Estamos actualizando los datos. Intenta mas tarde.');
+    return false;
+    },
+    "columns": [
+        { "data": "recurso", width: 400, class: "recurso-col" },
+        { "data": "descargas", render: $.fn.dataTable.render.number( ',', '.', 0 ), class: 'descargas-tabla', width: 200 },
+        { "data": "liga_saludable", render: function ( data, type, row ) {
+            var class_txt = 'ok';
+            if(data !== true){
+                class_txt = 'remove';
+            }
+            return '<span class="glyphicon glyphicon-' + class_txt + '"></>';
+        }, class: 'status_link text-center', width: 200
+        }
+    ],
+    columnDefs: [
+        { width: 200, targets: 0 },
+        { width: 200, targets: 0 },
+        { width: 200, targets: 0 },
+    ],
+    fixedColumns: true
+    });
+
+    orgLogoUrl = 'https://raw.githubusercontent.com/mxabierto/assets/master/img/logos/' + orgName + '.png';
+    $('#logo_org').attr('src', orgLogoUrl);
+} //Fin getapiOrg()
+
+/*
 $(".openModal").click(function(){
     $("#modalTotal").modal();
 });
@@ -346,12 +505,13 @@ $.ajax({
 
 orgLogoUrl = "<%= OPI_LOGOS_URL %>" + orgName + '.png';
 $('#logo_org').attr('src',orgLogoUrl);
+*/
+//function toTitleCase(str)
+//{
+//   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+//}
 
-function toTitleCase(str)
-{
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
-
+/*
 //Dependencias Opi
 $.ajax({
   url: "<%= OPI_DASHBOARD_URL_API %>/" + orgName + "/",
@@ -629,5 +789,6 @@ function drawChart() {
   function printPDF() {
     window.print();
   };
-
+*/
+});
 </script>
