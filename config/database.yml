@@ -6,19 +6,11 @@ default: &default
 
 development:
   <<: *default
-  database: adela_production
-  username: postgres
-  password: secretpassword
-  host: 0.0.0.0
-  port: 5433
+  database: adela_development
 
 test:
   <<: *default
   database: adela_test
-  username: postgres
-  password: secretpassword
-  host: 0.0.0.0
-  port: 5433
 
 production:
   <<: *default
