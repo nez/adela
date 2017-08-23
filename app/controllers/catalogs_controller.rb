@@ -29,6 +29,8 @@ class CatalogsController < ApplicationController
   def notify_administrator
     administrator = @catalog.organization.administrator
     CatalogMailer.publish_email(@catalog.id, administrator.user.id).deliver_now if administrator
+  rescue StandardError => error
+    logger.error(error)
   end
 
   def publish_catalog
