@@ -298,16 +298,48 @@ svg { overflow: visible !important; }
 
 .gray_back {
   background-color: #F7F5F5 !important;
+  padding-top: 30px;
 }
 
 .gray_back .container {
   padding: 40px 0 15px;
 }
 
+.input-search {
+  width: 95% !important;
+}
+
+.table-actions { margin-bottom: 30px; }
+
 .overlay-dashboard{
   position: absolute;
   right: 0;
   width: 100%;
+}
+
+.data-table p.author span {
+    margin-left: 8px;
+}
+
+.datosTitle a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    width: 400px;
+}
+
+.data-table table>tbody>tr>td {
+    padding-bottom: 10px;
+}
+
+.dataTable >thead>tr>td {
+    padding-bottom: 10px;
+    color: #0c9 !important;
+    text-transform: uppercase;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    font-weight: 700;
 }
 
 .table-500 { height: 500px; }
@@ -352,3 +384,4 @@ svg { overflow: visible !important; }
   }
 
 }
+
