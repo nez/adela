@@ -7,6 +7,10 @@ default: &default
 development:
   <<: *default
   database: adela_development
+  host: 0.0.0.0
+  port: 5438
+  password: adela
+  username: postgres
 
 test:
   <<: *default

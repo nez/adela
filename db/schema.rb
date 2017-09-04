@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 20170821173137) do
     t.datetime "updated_at"
     t.string   "slug",            limit: 255
     t.text     "description"
+    t.string   "logo_url"
     t.integer  "gov_type"
     t.text     "landing_page"
     t.boolean  "ranked",                      default: true
@@ -258,7 +259,7 @@ ActiveRecord::Schema.define(version: 20170821173137) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
-    t.integer  "failed_attempts",                    default: 0,  null: false
+    t.integer  "failed_attempts",        default: 0,  null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
   end
