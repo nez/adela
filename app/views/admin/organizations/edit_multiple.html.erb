@@ -1,8 +1,7 @@
-<div class="overlay-dashboard">
-
-  <div class="gray_back">
-    <div class="container">
-      <p>En este tablero podrás registrar el avance que las instituciones tienen en materia de datos abiertos de acuerdo a las guías de implementación. Si quieres conocer más de las guías da click en los siguientes íconos.</p>
+<div>
+  <div class="gray_back row">
+    <div class="row">
+      <p class="col-md-10 col-md-offset-1">En este tablero podrás registrar el avance que las instituciones tienen en materia de datos abiertos de acuerdo a las guías de implementación. Si quieres conocer más de las guías da click en los siguientes íconos.</p>
       <br>
       <div class="col-sm-10 col-sm-offset-1">
         <div class="col-sm-3">
@@ -30,13 +29,13 @@
     <br>
   </div>
 
-  <div class="container">
+  <div class="row table-actions">
     <h2 class="title">Tablero de instituciones de la APF</h2>
     <br>
-    <i class="fa fa-search fa-2x"></i><input type="text" id="searchbox" placeholder="Busca una institución">
+    <i class="fa fa-search fa-2x"></i><input type="text" id="searchbox" placeholder="Busca una institución" class="input-search">
     <div class="table-responsive">
       <%= form_tag update_multiple_admin_organizations_path, method: :put, remote: true do %>
-      <table id="apf_table" class="table display" cellspacing="0" width="100%">
+      <table id="apf_table" class="table dataTable" cellspacing="0" width="100%">
         <thead>
           <tr class="text-center">
             <td>Institución</td>
