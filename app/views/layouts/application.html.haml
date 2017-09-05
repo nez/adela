@@ -5,11 +5,11 @@
     %meta{charset: 'utf-8'}
     %meta{'http-equiv': 'X-UA-Compatible', content: 'IE=edge'}
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1'}
-    %link{rel:"import", href:"https://cdn.datos.gob.mx/bower_components/polymer/polymer.html"}
-    %link{rel:"import", href:"https://cdn.datos.gob.mx/bower_components/dgm-footer/dgm-footer.html"}
+    %link{rel:"import", href:"#{ENV['CDN_URL']}polymer/polymer.html"}
+    %link{rel:"import", href:"#{ENV['CDN_URL']}dgm-footer/dgm-footer.html"}
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all'
-    = stylesheet_link_tag('https://cdn.datos.gob.mx/bower_components/dgm-style/reset-footer.css', media: 'all')
+    = stylesheet_link_tag("#{ENV['CDN_URL']}dgm-style/reset-footer.css", media: 'all')
     = javascript_include_tag 'application'
     = html_import_tag 'application'
     /[if lt IE 9]
