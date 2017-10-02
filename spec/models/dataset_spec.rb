@@ -130,8 +130,8 @@ describe Dataset do
       expect(dataset).not_to be_valid(:ckan)
     end
 
-    it 'should not be valid without the landing_page field' do
-      dataset.landing_page = nil
+    it 'should not be valid without the data_dictionary field' do
+      dataset.data_dictionary = nil
       expect(dataset).not_to be_valid(:ckan)
     end
 

@@ -31,7 +31,7 @@ class Dataset < ActiveRecord::Base
   with_options on: :ckan do |dataset|
     dataset.validates :title, :description, :accrual_periodicity, :publish_date,
                       :contact_position, :mbox, :temporal, :sector, :keyword,
-                      :landing_page, presence: true
+                      :data_dictionary, presence: true
   end
 
   def identifier

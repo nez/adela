@@ -55,7 +55,7 @@ class OpeningPlanDatasetGenerator
       dataset.contact_position = ENV_CONTACT_POSITION_NAME
       dataset.mbox = organization_administrator.try(:email)
       dataset.temporal = Time.current.year
-      dataset.landing_page = @inventory.organization.landing_page
+      dataset.data_dictionary = @inventory.organization.landing_page
       dataset.accrual_periodicity = 'irregular'
       dataset.publish_date = DateTime.new(2015, 8, 28)
       dataset.editable = false

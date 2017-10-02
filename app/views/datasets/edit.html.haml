@@ -53,8 +53,8 @@
             = f.fields_for :dataset_sector do |sector_form|
               = sector_form.select :sector_id, options_for_sectors_select, { include_blank: true }, { class: 'form-control', 'data-toggle': 'tooltip', title: "#{t('tooltip.dataset.sector')}", required: true }
       .form-group.required
-        = f.label :landing_page, 'URL para consultar diccionario de datos', class: 'control-label'
-        = f.url_field :landing_page, class: 'form-control', 'data-toggle': 'tooltip', title: "#{t('tooltip.dataset.landing_page')}", required: true
+        = f.label :data_dictionary, 'URL para consultar diccionario de datos', class: 'control-label'
+        = f.url_field :data_dictionary, class: 'form-control', 'data-toggle': 'tooltip', title: "#{t('tooltip.dataset.data_dictionary')}", required: true
       .form-group
         = f.label :quality, 'URL para consultar el proceso de calidad de datos', class: 'control-label'
         = f.url_field :quality, class: 'form-control', 'data-toggle': 'tooltip', title: "#{t('tooltip.dataset.quality')}"

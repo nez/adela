@@ -4,7 +4,7 @@ class DatasetSerializer < ActiveModel::Serializer
   attributes :id, :title, :description, :issued, :modified, :identifier, :theme,
              :keyword, :language, :contactPoint, :temporal, :spatial, :govType,
              :accrualPeriodicity, :landingPage, :openessRating, :comments,
-             :quality
+             :quality, :dataDictionary
 
   def attributes
     data = super
@@ -35,7 +35,10 @@ class DatasetSerializer < ActiveModel::Serializer
   end
 
   def landingPage
-    object.landing_page
+  end
+
+  def dataDictionary
+    object.data_dictionary
   end
 
   def openessRating

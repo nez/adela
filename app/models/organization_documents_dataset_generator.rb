@@ -25,7 +25,7 @@ class OrganizationDocumentsDatasetGenerator
         dataset.mbox = @organization.administrator&.user&.email
         dataset.temporal = "#{Date.current.iso8601}/#{Date.new(2018, 11, 30).iso8601}"
         dataset.keyword = 'oficio,minutas,documentos'
-        dataset.landing_page = 'https://datos.gob.mx/guia/docs/oficio_designacion_enlace_administrador.docx'
+        dataset.data_dictionary = 'https://datos.gob.mx/guia/docs/oficio_designacion_enlace_administrador.docx'
         dataset.editable = false
       end
     end

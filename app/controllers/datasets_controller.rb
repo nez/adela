@@ -32,7 +32,7 @@ class DatasetsController < ApplicationController
       :contact_name,
       :contact_position,
       :mbox,
-      :landing_page,
+      :data_dictionary,
       :temporal_init_date,
       :temporal_term_date,
       :spatial,
