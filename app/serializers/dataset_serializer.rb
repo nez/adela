@@ -35,6 +35,7 @@ class DatasetSerializer < ActiveModel::Serializer
   end
 
   def landingPage
+    object.organization&.landing_page
   end
 
   def dataDictionary
