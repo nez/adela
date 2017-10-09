@@ -68,16 +68,4 @@ feature 'data catalog management' do
     json_response = JSON.parse(response.body)
     json_response['dataset'][0]['keyword'].sort == %w(bar foo)
   end
-
-  scenario 'dataset keywords contain the organization gov_type' do
-    organization = create(:federal_organization)
-    catalog = create(:catalog, organization: organization)
-    dataset = create(:dataset, catalog: catalog)
-    distribution = create(:distribution, dataset: dataset)
-    distribution.update_column(:state, 'published')
-
-    get "/#{organization.slug}/catalogo.json"
-    json_response = JSON.parse(response.body)
-    expect(json_response['dataset'][0]['keyword']).to include('federal')
-  end
 end

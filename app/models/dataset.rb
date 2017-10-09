@@ -43,7 +43,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def keywords
-    "#{keyword},#{gov_type},#{sectors}".chomp(',').lchomp(',').downcase.strip
+    "#{keyword},#{sectors}".chomp(',').lchomp(',').downcase.strip
   end
 
   def openess_rating

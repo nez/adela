@@ -266,11 +266,5 @@ describe Dataset do
       dataset.catalog.organization = organization
       expect(dataset.keywords).to include(organization.sectors.first.slug)
     end
-
-    it 'should include the organization gov_type' do
-      organization = create(:autonomous_organization)
-      dataset.catalog.organization = organization
-      expect(dataset.keywords).to include(organization.gov_type)
-    end
   end
 end
