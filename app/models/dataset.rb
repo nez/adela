@@ -68,6 +68,6 @@ class Dataset < ActiveRecord::Base
     end
 
     def gov_type
-      catalog.organization.gov_type
+      catalog.organization&.gov_type
     end
 end
