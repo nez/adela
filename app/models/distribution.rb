@@ -2,6 +2,9 @@ class Distribution < ActiveRecord::Base
   include Versionable
   include Publishable
   include DCATCommons
+  include FriendlyId
+
+  friendly_id :title, use: [:slugged, :finders]
 
   belongs_to :dataset
   audited associated_with: :dataset
@@ -19,6 +22,8 @@ class Distribution < ActiveRecord::Base
     distribution.validates :title, :description, :download_url, :publish_date,
                            :format, :modified, :temporal, presence: true
   end
+
+  alias_attribute :identifier, :slug
 
   def as_csv(options = {})
     if options[:style] == :inventory
@@ -50,5 +55,9 @@ class Distribution < ActiveRecord::Base
       unless modified.nil?
         errors.add(:modified, 'El valor del campo "Fecha de última modificación de datos" debe ser menor a la fecha actual.') if modified > Time.now
       end
+    end
+
+    def should_generate_new_friendly_id?
+      title_changed? || super
     end
 end
