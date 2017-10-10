@@ -2,6 +2,9 @@ class Distribution < ActiveRecord::Base
   include Versionable
   include Publishable
   include DCATCommons
+  include FriendlyId
+
+  friendly_id :title, use: [:slugged]
 
   belongs_to :dataset
   audited associated_with: :dataset
