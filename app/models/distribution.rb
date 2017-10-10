@@ -23,6 +23,8 @@ class Distribution < ActiveRecord::Base
                            :format, :modified, :temporal, presence: true
   end
 
+  alias_attribute :identifier, :slug
+
   def as_csv(options = {})
     if options[:style] == :inventory
       {
