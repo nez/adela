@@ -4,7 +4,7 @@ class Distribution < ActiveRecord::Base
   include DCATCommons
   include FriendlyId
 
-  friendly_id :title, use: [:slugged]
+  friendly_id :title, use: [:slugged, :finders]
 
   belongs_to :dataset
   audited associated_with: :dataset
