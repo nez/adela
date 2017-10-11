@@ -1,7 +1,7 @@
 class DistributionSerializer < ActiveModel::Serializer
   attributes :id, :title, :description, :issued, :modified, :license, :spatial,
              :downloadURL, :mediaType, :format, :byteSize, :temporal, :tools,
-             :publishDate, :codelist, :codelistLink
+             :publishDate, :codelist, :codelistLink, :dataset
 
   def license
     'https://datos.gob.mx/libreusomx/'
@@ -25,5 +25,11 @@ class DistributionSerializer < ActiveModel::Serializer
 
   def codelistLink
     object.codelist_link
+  end
+
+  def dataset
+    {
+      accrualPeriodicity: object.dataset&.accrual_periodicity,
+    }
   end
 end
