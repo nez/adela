@@ -45,10 +45,11 @@ feature 'data catalog management' do
       id title description issued modified identifier keyword language public
       contactPoint temporal spatial accrualPeriodicity landingPage publisher
       publishDate distribution openessRating govType theme comments quality dataDictionary
+      createdAt
     )
     dcat_distribution_keys = %w(
       id title description issued modified license downloadURL mediaType format
-      byteSize temporal spatial publishDate tools
+      byteSize temporal spatial publishDate tools createdAt
     )
 
     get "/#{organization.slug}/catalogo.json"
