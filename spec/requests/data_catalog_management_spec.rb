@@ -49,7 +49,7 @@ feature 'data catalog management' do
     )
     dcat_distribution_keys = %w(
       id title description issued modified license downloadURL mediaType format
-      byteSize temporal spatial publishDate tools createdAt
+      temporal spatial publishDate tools createdAt
     )
 
     get "/#{organization.slug}/catalogo.json"

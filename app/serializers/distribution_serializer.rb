@@ -10,7 +10,6 @@ class DistributionSerializer < ActiveModel::Serializer
     :downloadURL,
     :mediaType,
     :format,
-    :byteSize,
     :temporal,
     :tools,
     :publishDate,
@@ -31,10 +30,6 @@ class DistributionSerializer < ActiveModel::Serializer
 
   def mediaType
     object.media_type
-  end
-
-  def byteSize
-    object.byte_size
   end
 
   def publishDate

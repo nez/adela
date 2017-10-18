@@ -42,10 +42,6 @@
           .form-group.required
             = f.label :modified, 'Fecha de última modificación de datos',  class: 'control-label'
             = f.text_field :modified, value: f.object.modified&.strftime('%F'), 'data-placement':'right', 'data-container':'body', class: 'form-control input-icon datepicker dpDate', required: true, 'data-toggle': 'tooltip', title: "#{t('tooltip.distribution.modified')}"
-        .col-xs-6
-          .form-group.required
-            = f.label :byte_size, 'Tamaño en Bytes'
-            = f.text_field :byte_size,  class: 'form-control', 'data-toggle': 'tooltip', title: "#{t('tooltip.distribution.byte_size')}"
       .form-group
         = f.label :tools, 'Herramientas para visualizar los datos', class: 'control-label'
         = f.text_area :tools, class: 'autosize form-control', 'data-toggle': 'tooltip', title: "#{t('tooltip.distribution.tools')}"

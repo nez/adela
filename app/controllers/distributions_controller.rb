@@ -22,7 +22,6 @@ class DistributionsController < ApplicationController
       :modified,
       :temporal_init_date,
       :temporal_term_date,
-      :byte_size,
       :media_type,
       :format,
       :spatial,
