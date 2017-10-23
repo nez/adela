@@ -1,7 +1,7 @@
 namespace :clear_data do
     desc "Destroy datasets without distributions"
     task destroy_datasets_without_distributions: :environment do
-        Dataset.includes(:distributions).where(distributions: { id: nil }).destroy_all
+        datasets = Dataset.includes(:distributions).where(distributions: { id: nil }).delete_all
     end
 
     desc "Update issued column"
