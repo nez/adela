@@ -1,0 +1,20 @@
+body {
+  background: url('/images/landing-bg.png') 50% 50% no-repeat;
+  background-size: cover;
+}
+
+main {
+  height: 100%;
+}
+
+p {
+  color: #fff;
+  font-size: 1.6em;
+  text-align: center;
+  padding: 5.3em 0;
+  margin: 0;
+}
+
+p span {
+  font-weight: 900;
+}
