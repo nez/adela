@@ -141,10 +141,10 @@ namespace :clear_data do
         total = datasets.size
         datasets.each_with_index do |dataset, index|
             begin
-                temporal = datasets[:temporal].split('/').map do |date|
+                temporal = dataset[:temporal].split('/').map do |date|
                     ISO8601::Date.new(date)
                 end
-        
+                puts dataset.class
                 dataset[:temporal_init_date]= temporal[0].to_s
                 dataset[:temporal_term_date]= temporal[1].to_s
                 dataset.save(:validate=>false)
