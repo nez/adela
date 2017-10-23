@@ -1,7 +1,12 @@
 namespace :clear_data do
+
+    desc "Destroy distributions whtiout datasets"
+    task destroy_ditributions_without_datasets: :environment do
+        Distribution.where(dataset: nil).delete_all
+    end
     desc "Destroy datasets without distributions"
     task destroy_datasets_without_distributions: :environment do
-        datasets = Dataset.includes(:distributions).where(distributions: { id: nil }).delete_all
+        Dataset.includes(:distributions).where(distributions: { id: nil }).delete_all
     end
 
     desc "Update issued column"
@@ -52,38 +57,53 @@ namespace :clear_data do
 
     desc "Fix invalid dataset's title"
     task fix_invalid_title_dataset: :environment do
-        invalid_datasets = Dataset.select(&:invalid?).select do |dataset|
-            dataset.errors.messages.has_key?(:title)
+        class Dataset < ActiveRecord::Base
+            belongs_to :catalog
+            validates_uniqueness_of :title
         end
-      
-        invalid_datasets.each do |dataset|
+
+        repited_titles = Dataset.where(title: Dataset.select('title').group('title').having('count(*) > 1').pluck(:title) )
+        total = repited_titles.size
+
+        repited_titles.each_with_index do |dataset, index|
             organization = dataset.catalog.organization.title
+            next unless organization
+
             dataset.title = "#{dataset.title} de #{organization}"
-      
+
             unless dataset.save
-              created_at = dataset.created_at.strftime('%F %H:%M')
-              dataset.title = "#{dataset.title} creado el #{created_at}"
-      
-              dataset.save
+                created_at = dataset.created_at.strftime('%F %H:%M')
+                dataset.title = "#{dataset.title} creado el #{created_at}"
+                dataset.save(:validate=>false)
             end
+            puts "#{index + 1} de #{total} - ID: #{dataset.id}"
         end
     end
 
     desc "Fix invalid distributions"
     task fix_invalid_distributions: :environment do
-        invalid_distributions = Distribution.select(&:invalid?)
-        invalid_distributions.each do |distribution|
-          organization = distribution.catalog.organization&.title
-          next unless organization
+        class Distribution < ActiveRecord::Base
+            belongs_to :dataset
+            has_one :catalog, through: :dataset
+            has_one :organization, through: :dataset
+            validates_uniqueness_of :title
+        end
+        repited_titles = Distribution.where(title: Distribution.select('title').group('title').having('count(*) > 1').pluck(:title) )
+        total = repited_titles.size
+        repited_titles.each_with_index do |distribution, index|
+            next unless distribution.dataset && distribution.catalog.organization
+            
+            organization = distribution.catalog.organization.title 
+
+            distribution.title = "#{distribution.title} de #{organization}"
+            
+            unless distribution.save
+                created_at = distribution.created_at.strftime('%F %H:%M')
+                distribution.title = "#{distribution.title} creado el #{created_at}"
     
-          distribution.title = "#{distribution.title} de #{organization}"
-    
-          unless distribution.save
-            created_at = distribution.created_at.strftime('%F %H:%M')
-            distribution.title = "#{distribution.title} creado el #{created_at}"
-    
-            distribution.save
-          end
+                distribution.save(:validate=>false)
+            end
+            puts "#{index + 1} de #{total} - ID: #{distribution.id}"
         end
     end
 
