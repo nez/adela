@@ -1,4 +1,9 @@
 namespace :clear_data do
+    desc "Destroy datasets without distributions"
+    task destroy_datasets_without_distributions: :environment do
+        Dataset.includes(:distributions).where(distributions: { id: nil }).destroy_all
+    end
+
     desc "Update issued column"
     task update_issued_column: :environment do
         def data_fusion_query(dataset_id)
@@ -64,11 +69,6 @@ namespace :clear_data do
         end
     end
 
-    desc "Destroy datasets without distributions"
-    task destroy_datasets_without_distributions: :environment do
-        Dataset.includes(:distributions).where(distributions: { id: nil }).destroy_all
-    end
-
     desc "Fix invalid distributions"
     task fix_invalid_distributions: :environment do
         invalid_distributions = Distribution.select(&:invalid?)
@@ -87,44 +87,6 @@ namespace :clear_data do
         end
     end
 
-    desc "Split temporal data"
-    task split_temporal_data: :environment do
-        Dataset.where.not(temporal: nil).map do |dataset|
-            begin
-              temporal = dataset[:temporal].split('/').map do |date|
-                ISO8601::Date.new(date)
-              end
-      
-              next if temporal.size != 2
-      
-              dataset.update(
-                temporal_init_date: temporal[0].to_s,
-                temporal_term_date: temporal[1].to_s
-              )
-            rescue => error
-              puts error
-              next
-            end
-        end
-      
-        Distribution.where.not(temporal: nil).map do |distribution|
-            begin
-                temporal = distribution[:temporal].split('/').map do |date|
-                ISO8601::Date.new(date)
-                end
-        
-                next if temporal.size != 2
-        
-                distribution.update(
-                temporal_init_date: temporal[0].to_s,
-                temporal_term_date: temporal[1].to_s
-                )
-            rescue => error
-                puts error
-                next
-            end
-        end
-    end
 
     desc "Update media type"
     task update_media_type: :environment do
@@ -141,10 +103,56 @@ namespace :clear_data do
         end
     end
 
-    desc "update publish date equal dataset"
-    task update_publish_data_equal_dataset provisional: :eviroment do
+    desc "update distribution publish date like dataset"
+    task update_distribution_publish_date_like_dataset: :environment do
         Distribution.joins(:dataset).each do |distribution|
             distribution.update_column(:publish_date, distribution.dataset.publish_date)
+        end
+    end
+
+    desc "Split temporal data distribution"
+    task split_temporal_data_distribution: :environment do
+        distributions =  Distribution
+                            .select("id, temporal, temporal_init_date, temporal_term_date")
+                            .where("temporal ~* ?", '^\d{4}\-\d{2}\-\d{2}\/\d{4}\-\d{2}\-\d{2}')
+        total = distributions.size
+        distributions.each_with_index do |distribution, index|
+            begin
+                temporal = distribution[:temporal].split('/').map do |date|
+                    ISO8601::Date.new(date)
+                end
+        
+                distribution[:temporal_init_date]= temporal[0].to_s
+                distribution[:temporal_term_date]= temporal[1].to_s
+                distribution.save(:validate=>false)
+      
+            rescue => error
+                puts error
+            end
+            puts "#{index + 1 } de #{total} ID: #{distribution.id}"
+        end
+    end
+
+    desc "Split temporal data dataset"
+    task split_temporal_data_dataset: :environment do
+        datasets =  Dataset
+                            .select("id, temporal, temporal_init_date, temporal_term_date")
+                            .where("temporal ~* ?", '^\d{4}\-\d{2}\-\d{2}\/\d{4}\-\d{2}\-\d{2}')
+        total = datasets.size
+        datasets.each_with_index do |dataset, index|
+            begin
+                temporal = datasets[:temporal].split('/').map do |date|
+                    ISO8601::Date.new(date)
+                end
+        
+                dataset[:temporal_init_date]= temporal[0].to_s
+                dataset[:temporal_term_date]= temporal[1].to_s
+                dataset.save(:validate=>false)
+      
+            rescue => error
+                puts error
+            end
+            puts "#{index + 1 } de #{total} ID: #{dataset.id}"
         end
     end
 end
