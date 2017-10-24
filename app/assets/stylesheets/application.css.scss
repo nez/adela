@@ -68,7 +68,10 @@ p {
 }
 
 .margin-top-20 {
-  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.margin{
+  padding-bottom: 40px; 
 }
 
 .header_table { color: #0c9; text-transform: uppercase; }
@@ -145,6 +148,9 @@ thead th:nth-of-type(1) {
     margin-right: 0px;
     margin-left: 0px;
     padding: 10px;
+}
+.space-bottom {
+    padding-bottom: 40px;
 }
 .descargas-tabla { width: 25% !important; }
 .status_link { width: 25% !important; }

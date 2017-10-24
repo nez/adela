@@ -4,7 +4,6 @@ FactoryGirl.define do
     description { Faker::Lorem.paragraph }
     download_url { Faker::Internet.url }
     media_type { "application/#{Faker::App.name.downcase}" }
-    byte_size { Faker::Number.number(8) }
     modified { Faker::Time.backward(365) }
     temporal_init_date { Faker::Date.backward.iso8601 }
     temporal_term_date { Faker::Date.forward.iso8601 }

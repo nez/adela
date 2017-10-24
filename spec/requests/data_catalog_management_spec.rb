@@ -44,11 +44,12 @@ feature 'data catalog management' do
     dcat_dataset_keys = %w(
       id title description issued modified identifier keyword language public
       contactPoint temporal spatial accrualPeriodicity landingPage publisher
-      publishDate distribution openessRating govType theme comments quality
+      publishDate distribution openessRating govType theme comments quality dataDictionary
+      createdAt
     )
     dcat_distribution_keys = %w(
       id title description issued modified license downloadURL mediaType format
-      byteSize temporal spatial publishDate tools
+      temporal spatial publishDate tools createdAt
     )
 
     get "/#{organization.slug}/catalogo.json"
@@ -67,17 +68,5 @@ feature 'data catalog management' do
     get "/#{organization.slug}/catalogo.json"
     json_response = JSON.parse(response.body)
     json_response['dataset'][0]['keyword'].sort == %w(bar foo)
-  end
-
-  scenario 'dataset keywords contain the organization gov_type' do
-    organization = create(:federal_organization)
-    catalog = create(:catalog, organization: organization)
-    dataset = create(:dataset, catalog: catalog)
-    distribution = create(:distribution, dataset: dataset)
-    distribution.update_column(:state, 'published')
-
-    get "/#{organization.slug}/catalogo.json"
-    json_response = JSON.parse(response.body)
-    expect(json_response['dataset'][0]['keyword']).to include('federal')
   end
 end

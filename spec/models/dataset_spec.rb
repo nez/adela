@@ -130,8 +130,8 @@ describe Dataset do
       expect(dataset).not_to be_valid(:ckan)
     end
 
-    it 'should not be valid without the landing_page field' do
-      dataset.landing_page = nil
+    it 'should not be valid without the data_dictionary field' do
+      dataset.data_dictionary = nil
       expect(dataset).not_to be_valid(:ckan)
     end
 
@@ -265,12 +265,6 @@ describe Dataset do
       organization = create(:organization_with_sector)
       dataset.catalog.organization = organization
       expect(dataset.keywords).to include(organization.sectors.first.slug)
-    end
-
-    it 'should include the organization gov_type' do
-      organization = create(:autonomous_organization)
-      dataset.catalog.organization = organization
-      expect(dataset.keywords).to include(organization.gov_type)
     end
   end
 end

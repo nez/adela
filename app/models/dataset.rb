@@ -31,7 +31,7 @@ class Dataset < ActiveRecord::Base
   with_options on: :ckan do |dataset|
     dataset.validates :title, :description, :accrual_periodicity, :publish_date,
                       :contact_position, :mbox, :temporal, :sector, :keyword,
-                      :landing_page, presence: true
+                      :data_dictionary, presence: true
   end
 
   def identifier
@@ -43,7 +43,7 @@ class Dataset < ActiveRecord::Base
   end
 
   def keywords
-    "#{keyword},#{gov_type},#{sectors}".chomp(',').lchomp(',').downcase.strip
+    "#{keyword},#{sectors}".chomp(',').lchomp(',').downcase.strip
   end
 
   def openess_rating
@@ -68,6 +68,6 @@ class Dataset < ActiveRecord::Base
     end
 
     def gov_type
-      catalog.organization.gov_type
+      catalog.organization&.gov_type
     end
 end

@@ -14,7 +14,6 @@ es:
         init: Inicio del período temporal que abarca el recurso de datos. Algunos ejemplos son, "2013”, "2014-01", etc.
         term: Fin del período temporal que abarca el recurso de datos. Algunos ejemplos son, "2014”, "2014-04", etc.
       modified: La fecha más reciente en la que se modificó, cambió o actualizó el Recurso de Datos
-      byte_size: El tamaño en bytes del recurso o archivo descargable. Por ejemplo, "24.2 MB"
       tools: Lista de las herramientas y/o aplicaciones recomendadas para visualizar los datos. Por ejemplo, "JSON Viewer, Excel".
       codelist: Descripción del catálogo usado como marco geoestadístico para los datos. Por ejemplo, "Marco Geoestadístico Nacional de INEGI".
       codelist_link: Dirección electrónica (enlace) como referencia al catálogo del marco geoestadístico. Por ejemplo, "http://www.inegi.org.mx/geo/contenidos/geoestadistica/catalogoclaves.aspx".

@@ -43,6 +43,8 @@ Adela::Application.routes.draw do
         get 'contact_point', on: :member
       end
 
+      resources :distributions, only: [:show]
+
       resources :organizations, only: [:show] do
         get 'inventory', on: :member
         get 'documents', on: :member

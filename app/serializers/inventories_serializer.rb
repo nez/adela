@@ -3,7 +3,7 @@ class InventoriesSerializer < ActiveModel::Serializer
 
   def attributes
     data ||= {}
-    data[:title] = "Plan de Apertura Institucional de #{object.organization.title}"
+    data[:title] = "Plan de Apertura Institucional de #{object.organization&.title}"
     data.merge super
   end
 end

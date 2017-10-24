@@ -1,10 +1,28 @@
 class DatasetSerializer < ActiveModel::Serializer
   has_many :distributions, root: :distribution, serializer: DistributionSerializer
 
-  attributes :id, :title, :description, :issued, :modified, :identifier, :theme,
-             :keyword, :language, :contactPoint, :temporal, :spatial, :govType,
-             :accrualPeriodicity, :landingPage, :openessRating, :comments,
-             :quality
+  attributes(
+    :id,
+    :title,
+    :description,
+    :issued,
+    :modified,
+    :identifier,
+    :theme,
+    :keyword,
+    :language,
+    :contactPoint,
+    :temporal,
+    :spatial,
+    :govType,
+    :accrualPeriodicity,
+    :landingPage,
+    :openessRating,
+    :comments,
+    :quality,
+    :dataDictionary,
+    :createdAt,
+  )
 
   def attributes
     data = super
@@ -35,7 +53,11 @@ class DatasetSerializer < ActiveModel::Serializer
   end
 
   def landingPage
-    object.landing_page
+    object.organization&.landing_page
+  end
+
+  def dataDictionary
+    object.data_dictionary
   end
 
   def openessRating
@@ -48,5 +70,9 @@ class DatasetSerializer < ActiveModel::Serializer
 
   def theme
     object.sector&.title
+  end
+
+  def createdAt
+    object.created_at
   end
 end

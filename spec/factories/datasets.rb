@@ -10,7 +10,7 @@ FactoryGirl.define do
     temporal_init_date { Faker::Date.backward.iso8601 }
     temporal_term_date { Faker::Date.forward.iso8601 }
     spatial { "#{Faker::Address.latitude}/#{Faker::Address.longitude}" }
-    landing_page { Faker::Internet.url }
+    data_dictionary { Faker::Internet.url }
     accrual_periodicity 'R/P1Y'
     issued { Faker::Time.forward }
     publish_date { Faker::Time.forward }
@@ -35,7 +35,7 @@ FactoryGirl.define do
       mbox nil
       temporal nil
       spatial nil
-      landing_page nil
+      data_dictionary nil
       issued nil
       comments nil
       quality nil
