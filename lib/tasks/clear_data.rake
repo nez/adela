@@ -4,9 +4,10 @@ namespace :clear_data do
     task destroy_ditributions_without_datasets: :environment do
         Distribution.where(dataset: nil).delete_all
     end
+    #NO FUNCIONA
     desc "Destroy datasets without distributions"
     task destroy_datasets_without_distributions: :environment do
-        Dataset.includes(:distributions).where(distributions: { id: nil }).delete_all
+        Dataset.includes(:distributions).where(distributions: {id: nil}).destroy_all
     end
 
     desc "Update issued column"
@@ -65,45 +66,75 @@ namespace :clear_data do
         repited_titles = Dataset.where(title: Dataset.select('title').group('title').having('count(*) > 1').pluck(:title) )
         total = repited_titles.size
 
-        repited_titles.each_with_index do |dataset, index|
-            organization = dataset.catalog.organization.title
-            next unless organization
+        #Contador de titulos repetidos
+        counts = Hash.new
 
-            dataset.title = "#{dataset.title} de #{organization}"
+        repited_titles.each_with_index do |dataset, index|
+            #no deberia ser necesaria esta linea
+            next unless dataset.catalog && dataset.catalog.organization 
+
+            #rescatando titulo original
+            origin_title = dataset.title
+            
+            #inicializacion de conteo
+            counts[origin_title] = 0 unless counts[origin_title]
+
+            #titulo nivel 0
+            dataset.title = "#{dataset.title} de #{dataset.catalog.organization.title}"
 
             unless dataset.save
-                created_at = dataset.created_at.strftime('%F %H:%M')
-                dataset.title = "#{dataset.title} creado el #{created_at}"
-                dataset.save(:validate=>false)
+                #titulo nivel 1
+                dataset.title = "#{dataset.title} creado el #{dataset.created_at.strftime('%F %H:%M')}"
+            
+                unless dataset.save
+                    #titulo nivel 2 (con consecutivo no deberia haber repetidos)
+                    dataset.title = "#{dataset.title} (#{counts[origin_title] - 1})"
+                    dataset.save
+                end
             end
             puts "#{index + 1} de #{total} - ID: #{dataset.id}"
+            counts[origin_title] += 1
         end
     end
 
-    desc "Fix invalid distributions"
-    task fix_invalid_distributions: :environment do
+    desc "Fix invalid distribution's title"
+    task fix_invalid_title_distribution: :environment do
         class Distribution < ActiveRecord::Base
             belongs_to :dataset
             has_one :catalog, through: :dataset
             has_one :organization, through: :dataset
             validates_uniqueness_of :title
         end
+        #Consulta distribucion con titulo repetido
         repited_titles = Distribution.where(title: Distribution.select('title').group('title').having('count(*) > 1').pluck(:title) )
         total = repited_titles.size
-        repited_titles.each_with_index do |distribution, index|
-            next unless distribution.dataset && distribution.catalog.organization
-            
-            organization = distribution.catalog.organization.title 
 
-            distribution.title = "#{distribution.title} de #{organization}"
-            
+        #Contador de titulos repetidos
+        counts = Hash.new
+
+        repited_titles.each_with_index do |distribution, index|
+            #no deberia ser necesaria esta linea
+            next unless distribution.catalog && distribution.catalog.organization 
+
+            #rescatando titulo original
+            origin_title = distribution.title
+
+            #inicializacion de conteo
+            counts[origin_title] = 0 unless counts[origin_title]
+
+            # titulo nivel 0
+            distribution.title = "#{distribution.title} de #{distribution.catalog.organization.title}"
             unless distribution.save
-                created_at = distribution.created_at.strftime('%F %H:%M')
-                distribution.title = "#{distribution.title} creado el #{created_at}"
-    
-                distribution.save(:validate=>false)
+                #titulo nivel 1
+                distribution.title = "#{distribution.title} creado el #{distribution.created_at.strftime('%F %H:%M')}"
+                unless distribution.save
+                    #titulo nivel 2 (con consecutivo no deberia haber repetidos)
+                    distribution.title = "#{distribution.title} (#{counts[origin_title] - 1})"
+                    distribution.save
+                end
             end
             puts "#{index + 1} de #{total} - ID: #{distribution.id}"
+            counts[origin_title] += 1
         end
     end
 
