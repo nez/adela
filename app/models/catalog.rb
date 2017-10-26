@@ -1,7 +1,6 @@
 class Catalog < ActiveRecord::Base
+  include Auditable
   include Loggable
-  audited
-  has_associated_audits
 
   belongs_to :organization
 
