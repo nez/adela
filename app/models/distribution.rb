@@ -1,5 +1,4 @@
 class Distribution < ActiveRecord::Base
-  include Versionable
   include Publishable
   include DCATCommons
   include FriendlyId
