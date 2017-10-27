@@ -1,13 +1,12 @@
 class Distribution < ActiveRecord::Base
-  include Versionable
   include Publishable
   include DCATCommons
   include FriendlyId
+  include Auditable
 
   friendly_id :title, use: [:slugged, :finders]
 
   belongs_to :dataset
-  audited associated_with: :dataset
 
   validates_uniqueness_of :title
   validates_uniqueness_of :download_url, allow_nil: true

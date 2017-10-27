@@ -1,12 +1,9 @@
 class Dataset < ActiveRecord::Base
-  include Versionable
   include Publishable
   include DCATCommons
+  include Auditable
 
   belongs_to :catalog
-
-  has_associated_audits
-  audited associated_with: :catalog
 
   has_many :distributions, dependent: :destroy
 
