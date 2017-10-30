@@ -2,7 +2,7 @@ module Publishable
   extend ActiveSupport::Concern
 
   included do
-    after_commit :run_transitions
+    after_commit :run_transitions, on: [:create, :update]
 
     state_machine initial: :broke do
       state :broke
