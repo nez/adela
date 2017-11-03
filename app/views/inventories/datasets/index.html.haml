@@ -1,4 +1,5 @@
 - breadcrumb :inventory
+.loading.spinner
 %h3 Plan de Apertura Institucional
 .row
   .col-md-9
@@ -11,8 +12,8 @@
       = link_to new_inventories_dataset_path, { class: 'btn btn-primary btn-lg pull-right' } do
         %span.icon.glyphicon.glyphicon-plus{'aria-hidden': 'true'}
         Agregar un conjunto nuevo
-    .clearfix
-
+    .clearfix 
+    .modal#spinner{style:"display:none;"}
 - if current_organization.catalog && current_organization.catalog.datasets.present?
   .table-responsive
     %table.table{ 'style' => 'border-collapse:collapse;' }
@@ -114,3 +115,8 @@
         %span.icon.icon-left
           = inline_svg 'next.svg'
     .clearfix
+%div
+:javascript
+   $(window).load(function() {
+      $(".spinner").fadeOut("slow");
+       });

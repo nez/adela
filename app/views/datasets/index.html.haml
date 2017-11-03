@@ -1,4 +1,5 @@
 - breadcrumb :catalog
+.loading.spinner
 %h3 Documenta tus Conjuntos y Recursos de Datos Abiertos
 = form_for @catalog, url: check_organization_catalogs_path(current_organization.catalog), method: :get do |f|
   .row
@@ -76,6 +77,7 @@
         = f.button 'Publicar', type: 'submit', id: 'publish', class: 'btn btn-lg btn-primary disabled', disabled: true
       .clearfix
 
+    .modal#spinner{style:"display:none;"}
 = render "tour_index"
 
 :javascript
@@ -98,3 +100,7 @@
     // or disable otherwise
     $("input:checked").click(updatePublishButton);
   });
+:javascript
+   $(window).load(function() {
+      $(".spinner").fadeOut("slow");
+       });

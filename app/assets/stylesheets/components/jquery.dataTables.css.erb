@@ -1,3 +1,18 @@
+
+.spinner {
+  position:   fixed;
+    background-position: center;
+    z-index:    10000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background-color:black;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+    background-repeat: no-repeat;
+    background-image: url(<%= asset_path('loading.gif') %>);
+}
 /*
  * Table styles
  */
