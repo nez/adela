@@ -1,29 +1,21 @@
 namespace :clear_data do
-
-    desc "Destroy distributions whtiout datasets"
-    task destroy_ditributions_without_datasets: :environment do
-        Distribution.where(dataset: nil).delete_all
-    end
-    #NO FUNCIONA
-    desc "Destroy datasets without distributions"
-    task destroy_datasets_without_distributions: :environment do
-        Dataset.includes(:distributions).where(distributions: {id: nil}).destroy_all
-    end
-
     desc "Update issued column"
     task update_issued_column: :environment do
+        contador = 1
         def data_fusion_query(dataset_id)
             url = "https://api.datos.gob.mx/v1/data-fusion?id=#{dataset_id}"
             response = HTTParty.get(url)
         
             JSON.parse(response.body)
-        rescue SocketError => e
+        rescue SocketError, JSON::ParserError => e
             puts e
             sleep 10
             retry
         end
 
         Dataset.find_each do |dataset|
+            puts "iteracion #{contador}"
+            contador +=1
             data_fusion_results = data_fusion_query(dataset.id)['results']
             next if data_fusion_results.blank?
       
@@ -43,7 +35,7 @@ namespace :clear_data do
             ).update_all(issued: issued)
         end
     end
-
+    
     desc "Update state dataset"
     task update_state_dataset: :environment do
         Dataset.where.not(issued: nil).update_all(state: 'published')
@@ -51,8 +43,18 @@ namespace :clear_data do
         Dataset.where(state: 'broke').map(&:document)
     end
 
+    desc "Destroy distributions whtiout datasets"
+    task destroy_ditributions_without_datasets: :environment do
+        Distribution.where(dataset: nil).delete_all
+    end
+    
+    desc "Destroy datasets without distributions"
+    task destroy_datasets_without_distributions: :environment do
+        Dataset.includes(:distributions).where(distributions: {id: nil}).destroy_all
+    end
+
     desc "Update invalid dataset periodicity"
-    task datasete_invalid_periodicity: :environment do
+    task dataset_invalid_periodicity: :environment do
         Dataset.where(accrual_periodicity: nil).update_all(accrual_periodicity: 'irregular')
     end
 
@@ -138,22 +140,6 @@ namespace :clear_data do
         end
     end
 
-
-    desc "Update media type"
-    task update_media_type: :environment do
-        csv_url  = 'https://gist.githubusercontent.com/babasbot/3ca79415d045fb70846355af7798c1ab/raw/c2cb482fca67555dfa512754487d4e34b1a629ec/cambios-de-formato.csv'
-        csv_file = open(csv_url)
-    
-        CSV.foreach(csv_file, headers: true) do |row|
-          begin
-            distribution = Distribution.find(row['id'])
-            distribution.update_column(:format, row['final-format'])
-          rescue StandardError => error
-            puts "{ 'error': '#{error}', 'distribution_id': #{row['id']}}"
-          end
-        end
-    end
-
     desc "update distribution publish date like dataset"
     task update_distribution_publish_date_like_dataset: :environment do
         Distribution.joins(:dataset).each do |distribution|
@@ -172,10 +158,7 @@ namespace :clear_data do
                 temporal = distribution[:temporal].split('/').map do |date|
                     ISO8601::Date.new(date)
                 end
-        
-                distribution[:temporal_init_date]= temporal[0].to_s
-                distribution[:temporal_term_date]= temporal[1].to_s
-                distribution.save(:validate=>false)
+                distribution.update_columns(temporal_init_date: temporal[0].to_s, temporal_term_date: temporal[1].to_s)
       
             rescue => error
                 puts error
@@ -195,10 +178,7 @@ namespace :clear_data do
                 temporal = dataset[:temporal].split('/').map do |date|
                     ISO8601::Date.new(date)
                 end
-                puts dataset.class
-                dataset[:temporal_init_date]= temporal[0].to_s
-                dataset[:temporal_term_date]= temporal[1].to_s
-                dataset.save(:validate=>false)
+                dataset.update_columns(temporal_init_date: temporal[0].to_s, temporal_term_date: temporal[1].to_s)
       
             rescue => error
                 puts error
