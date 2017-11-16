@@ -6,9 +6,11 @@ ENV \
   RAILS_RELATIVE_URL_ROOT="/adela" \
   BUILD_PACKAGES="build-base curl-dev" \
   RAILS_PACKAGES="icu-dev zlib-dev libxml2-dev libxslt-dev tzdata postgresql-dev nodejs"
+  TZ=America/Mexico_City
 
 RUN \
   apk --update --upgrade add $BUILD_PACKAGES $RAILS_PACKAGES
+  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN mkdir /app
 WORKDIR /app
