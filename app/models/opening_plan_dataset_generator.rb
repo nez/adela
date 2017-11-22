@@ -36,7 +36,7 @@ class OpeningPlanDatasetGenerator
   end
 
   def inventory_dataset
-    @inventory.organization.catalog.datasets.where("title LIKE 'Plan de Apertura Institucional de #{@inventory.organization.title}'").last
+    @inventory.organization.catalog.datasets.where("title LIKE 'Plan de Apertura Institucional%'").last
   end
 
   def create_dataset_and_distribution
