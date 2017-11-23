@@ -1,9 +1,6 @@
 class Organization < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders]
-  validates :ranked, inclusion: { in: [true, false] }
-  validates :title, :landing_page, :description, :gov_type, presence: true
-  validates :title, :landing_page, uniqueness: true
 
   has_one :administrator
   has_one :catalog, -> { order('created_at desc') }
