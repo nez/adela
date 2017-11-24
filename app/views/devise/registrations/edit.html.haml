@@ -1,12 +1,13 @@
 .container
   = custom_devise_error_messages!
   .card
-    %h3.title Cambiar contraseña
+    %h3 Cambiar contraseña
     = form_for(resource, as: resource_name, url: user_registration_path(resource_name), html: { method: :patch }) do |f|
       .form-group
         = f.password_field :current_password, autocomplete: 'off', placeholder: 'Contraseña actual', class: 'form-control'
       .form-group
         = f.password_field :password, autocomplete: 'off', placeholder: 'Nueva contraseña', class: 'form-control'
+      .form-group
         = f.password_field :password_confirmation, autocomplete: 'off', placeholder: 'Confirmar nueva contraseña', class: 'form-control'
       .form-group
         = f.submit 'Cambiar contraseña', class: 'btn btn-primary'
