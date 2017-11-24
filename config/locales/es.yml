@@ -170,6 +170,7 @@ es:
         update: "Se ha actualizado la organización exitosamente."
         documents:
           update: "Gracias por cargar tus oficios."
+          error: "Ocurrió un error al cargar tus oficios."
     alert:
       user:
         create: "Ocurrió un error al crear el usuario."
