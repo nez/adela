@@ -8,7 +8,7 @@
       = label_tag :email, 'Correo Electrónico:'
       = text_field_tag :email, '', class: 'form-control'
     .form-group
-      = label_tag :organization, 'Organizacion:'
+      = label_tag :organization, 'Organización:'
       = select_tag :organization, options_for_select(organizations_options), prompt: '', class: 'form-control'
     .form-group
       %button.btn.btn-primary{ type: 'submit' } Buscar
